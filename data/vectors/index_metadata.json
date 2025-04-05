@@ -1,0 +1,20 @@
+
+{
+  "documents": [
+    {
+      "filename": "ai_trends_2024.pdf",
+      "chunks": 5,
+      "embedding_model": "OpenAI/text-embedding-ada-002"
+    },
+    {
+      "filename": "nlp_applications.txt",
+      "chunks": 3,
+      "embedding_model": "OpenAI/text-embedding-ada-002"
+    },
+    {
+      "filename": "openai_api_guidelines.md",
+      "chunks": 4,
+      "embedding_model": "OpenAI/text-embedding-ada-002"
+    }
+  ]
+}
