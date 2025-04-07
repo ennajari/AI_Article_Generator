@@ -17,39 +17,25 @@ We implement a full pipeline that includes:
 
 ## 🧱 Project Structure
 <pre>
-article-generation-crew/
-│
-├── notebooks/                 # Dossier pour les notebooks Jupyter
-│   ├── 1_setup_environment.ipynb      # Configuration de l'environnement
-│   ├── 2_rag_vectordb_demo.ipynb      # Démonstration de RAG et base de données vectorielle
-│   ├── 3_agent_implementation.ipynb   # Implémentation des agents
-│   └── 4_full_article_generation.ipynb # Génération complète d'article
-│
-├── data/                      # Dossier pour stocker les données
-│   ├── documents/             # Documents source pour RAG
-│   └── vectors/               # Stockage pour la base de données vectorielle
-│
-├── src/                       # Code source réutilisable
-│   ├── agents/                # Définitions des agents
-│   │   ├── __init__.py
-│   │   ├── researcher.py      # Agent Researcher
-│   │   ├── outline_maker.py   # Agent Outline Specialist
-│   │   ├── writer.py          # Agent Writer
-│   │   └── editor.py          # Agent Editor
-│   │
-│   ├── utils/                 # Fonctions utilitaires
-│   │   ├── __init__.py
-│   │   ├── vector_store.py    # Gestion de la base de données vectorielle
-│   │   └── rag_utils.py       # Utilitaires pour RAG
-│   │
-│   └── __init__.py
-│
-├── outputs/                   # Dossier pour les articles générés
-│
-├── requirements.txt           # Dépendances du projet
-├── .env                       # Fichier pour les variables d'environnement (clés API)
-└── README.md                  # Documentation du projet
-
+AI_Article_Generator/
+├── notebooks/
+│   ├── 01_setup_and_data.ipynb        # Environment setup and vector store prep
+│   ├── 02_agents_and_tasks.ipynb      # Define agents and tasks
+│   ├── 03_run_workflow.ipynb          # Execute the crew and generate output
+│   └── 04_analysis_and_refinement.ipynb # Analyze results and iterate
+├── src/
+│   ├── agents.py                      # Agent definitions
+│   ├── tasks.py                       # Task definitions
+│   ├── rag_utils.py                   # RAG and vector store utilities
+│   └── crew_setup.py                  # Crew configuration
+├── data/
+│   ├── sample_docs.txt                # Sample text for vector store
+│   └── output/                        # Generated articles
+│       ├── article_draft.md
+│       └── article_final.md
+├── requirements.txt                   # Project dependencies
+├── README.md                          # Project overview and instructions
+└── .env                               # Environment variables (e.g., API keys)
 </pre>
 ---
 
