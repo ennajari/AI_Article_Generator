@@ -1,0 +1,85 @@
+---
+research_article_task:
+  description: >-
+    Using the provided {article_topic}, query the vector database at {vector_db_url}
+    and additional sources {article_sources} to retrieve and summarize relevant research.
+    Focus on key insights, statistics, and supporting evidence related to {article_topic}.
+    Consider the {user_preferences} when gathering information. Ensure all information
+    is factually accurate and from reliable sources. Use the GeminiResearchTool for
+    deeper insights when necessary.
+  expected_output: >-
+    A concise research summary (1000-1500 words) that captures key insights, statistics,
+    and relevant information about {article_topic}. The summary should be well-organized
+    by subtopics and include citations for all sources used.
+  async_execution: false
+  agent: article_researcher
+
+outline_article_task:
+  description: >-
+    Analyze the research summary from research_article_task to create a
+    structured outline for the article on {article_topic}. Include sections such as
+    introduction, key points, detailed sub-sections, and a conclusion. Follow the
+    {user_preferences} for structure and style. Ensure the outline provides a logical
+    flow for the article and covers all key aspects of the research.
+  expected_output: >-
+    A detailed outline with defined headings and subpoints for writing
+    the article on {article_topic}. The outline should include placeholders for
+    evidence, examples, and quotes where appropriate. It should follow a logical
+    progression and be organized to maintain reader engagement.
+  async_execution: false
+  agent: article_outline_designer
+  context:
+  - research_article_task
+
+draft_article_task:
+  description: >-
+    Using both the research summary from research_article_task and the
+    outline from outline_article_task, draft a comprehensive article. Develop each
+    section in detail, ensuring the narrative is engaging and informative for {article_topic}.
+    Follow the {user_preferences} for tone, style, and formatting. Include proper citations
+    for all factual claims and statistics.
+  expected_output: >-
+    A complete draft article (1500-2000 words) that follows the outline and integrates
+    research insights about {article_topic}. The draft should be well-written,
+    engaging, and adhere to the specified user preferences. It should include
+    all necessary citations and maintain a consistent voice throughout.
+  async_execution: false
+  agent: article_writer
+  context:
+  - research_article_task
+  - outline_article_task
+
+edit_article_task:
+  description: >-
+    Review the article draft from draft_article_task, refine the content
+    for clarity, tone, and grammatical accuracy. Ensure that the final output is polished
+    and meets high editorial standards for {article_topic}. Check that it aligns with
+    the {user_preferences} and that all citations are properly formatted. Look for
+    opportunities to enhance readability and engagement.
+  expected_output: >-
+    A refined, well-edited final article ready for publication on {article_topic}.
+    The article should be free of grammatical errors, have a consistent tone,
+    and effectively communicate the key points. All citations should be properly
+    formatted and the content should be optimized for reader engagement.
+  async_execution: false
+  agent: article_editor
+  context:
+  - draft_article_task
+
+data_flywheel_task:
+  description: >-
+    Collect feedback and performance metrics using available data sources
+    and user interactions from the published article. Analyze the data to update and
+    refine the vector database, ensuring improved retrieval, research, and subsequent
+    article generations on {article_topic}. Use the GeminiFeedbackAnalysisTool to
+    identify patterns and insights from the feedback data.
+  expected_output: >-
+    A processed data report containing key feedback insights and actionable
+    updates to enhance the data model and RAG process for future articles on {article_topic}.
+    The report should include specific recommendations for improvements to the
+    research process, content structure, and writing style based on user feedback
+    and performance metrics.
+  async_execution: false
+  agent: data_flywheel_coordinator
+  context:
+  - edit_article_task
